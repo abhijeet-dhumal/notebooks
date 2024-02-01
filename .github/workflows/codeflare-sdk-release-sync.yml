@@ -43,6 +43,8 @@ jobs:
 
     - name: make sync 
       run: |
+        pwd | echo
+        ls | cat
         git config --global user.email "abhijeetdhumal652@gmai.com"
         git config --global user.name "abhijeet-dhumal" 
         cd jupyter/datascience/ubi8-python-3.8 && pipenv install codeflare-sdk~="${CODEFLARE_RELEASE_VERSION}"
