@@ -65,16 +65,6 @@ jobs:
         run: |
           git fetch origin  ${{ env.UPDATER_BRANCH }} && git pull origin  ${{ env.UPDATER_BRANCH }} && git add ./jupyter/pytorch/ubi9-python-3.9/Pipfile && git commit -m "Update pipfile to sync with Codeflare-SDK release via ${{ env.UPDATER_BRANCH }} GitHub action" && git push origin  ${{ env.UPDATER_BRANCH }}
   
-  # Creates the Pull Request
-  open-pull-request:
-    needs: [update-sync]
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
       - name: pull-request
         uses: repo-sync/pull-request@v2
         with:
