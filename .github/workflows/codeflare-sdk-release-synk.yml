@@ -49,14 +49,14 @@ jobs:
       - name: Fetch codeflare_sdk_release_version, and update the Pipfile
         run: |
           pwd 
-          pwd | echo > /dev/null 2>&1
+          pwd | echo > /dev/null 2>&1 || true
           echo "./"
-          cat ./README.md > /dev/null 2>&1
+          cat ./README.md > /dev/null 2>&1 || true
           echo "nothing"
-          cat README.md > /dev/null 2>&1
+          cat README.md > /dev/null 2>&1 || true
           echo "/"
-          cat /README.md > /dev/null 2>&1
-          echo -e "\n"
+          cat /README.md > /dev/null 2>&1 || true
+          echo -e "\n" > /dev/null 2>&1 || true
           cd ./jupyter/datascience/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
           cd ./jupyter/datascience/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
           cd ./jupyter/pytorch/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
