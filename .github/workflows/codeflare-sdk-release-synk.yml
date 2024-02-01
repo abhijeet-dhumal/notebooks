@@ -38,11 +38,11 @@ jobs:
         else
           echo "pip not installed"
         fi
-        
+
     - name: make sync 
       run: |
-        git config --global user.email "github-actions[bot]@users.noreply.github.com"
-        git config --global user.name "GitHub Actions"
+        git config --global user.email "abhijeetdhumal652@gmai.com"
+        git config --global user.name "abhijeet-dhumal" 
         cd jupyter/datascience/ubi8-python-3.8 && pipenv install codeflare-sdk~="${CODEFLARE_RELEASE_VERSION}"
         cd jupyter/datascience/ubi9-python-3.9 && pipenv install codeflare-sdk~="${CODEFLARE_RELEASE_VERSION}"
         cd jupyter/pytorch/ubi9-python-3.9 && pipenv install codeflare-sdk~="${CODEFLARE_RELEASE_VERSION}"
