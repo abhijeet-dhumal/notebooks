@@ -31,6 +31,14 @@ jobs:
         git checkout -b ${{ env.UPDATER_BRANCH }}
         git push --set-upstream origin ${{ env.UPDATER_BRANCH }}
 
+    - name: Install dependencies
+      run: |
+        if command -v pip &> /dev/null;then 
+          pip install pipenv 
+        else
+          echo "pip not installed"
+        fi
+        
     - name: make sync 
       run: |
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
