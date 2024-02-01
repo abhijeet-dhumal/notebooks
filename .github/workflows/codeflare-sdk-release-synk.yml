@@ -35,7 +35,6 @@ jobs:
       run: |
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git config --global user.name "GitHub Actions"
-        
         cd jupyter/datascience/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
         cd jupyter/datascience/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
         cd jupyter/pytorch/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
