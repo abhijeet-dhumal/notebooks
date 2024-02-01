@@ -51,6 +51,13 @@ jobs:
           pwd 
           ls -l | echo
           pwd | echo 
+          echo "./"
+          cat ./README.md
+          echo "nothing"
+          cat README.md
+          echo "/"
+          cat /README.md
+          echo -e "\n"
           cd ./jupyter/datascience/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
           cd ./jupyter/datascience/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
           cd ./jupyter/pytorch/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
