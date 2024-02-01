@@ -49,18 +49,18 @@ jobs:
       - name: Fetch codeflare_sdk_release_version, and update the Pipfile
         run: |
           pwd 
-          cd ./jupyter/datascience/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
-          cd ./jupyter/datascience/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
-          cd ./jupyter/pytorch/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
-          cd ./jupyter/tensorflow/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
-          cd ./jupyter/trustyai/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
-          cd ./jupyter/trustyai/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
-          cd ./runtimes/datascience/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
-          cd ./runtimes/datascience/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
-          cd ./runtimes/pytorch/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
-          cd ./runtimes/pytorch/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
-          cd ./runtimes/tensorflow/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
-          cd ./runtimes/tensorflow/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd /home/runner/work/notebooks/notebooks/jupyter/datascience/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd /home/runner/work/notebooks/notebooksjupyter/datascience/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd /home/runner/work/notebooks/notebooksjupyter/pytorch/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd /home/runner/work/notebooks/notebooksjupyter/tensorflow/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd /home/runner/work/notebooks/notebooksjupyter/trustyai/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd /home/runner/work/notebooks/notebooksjupyter/trustyai/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd /home/runner/work/notebooks/notebooksruntimes/datascience/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd /home/runner/work/notebooks/notebooksruntimes/datascience/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd /home/runner/work/notebooks/notebooksruntimes/pytorch/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd /home/runner/work/notebooks/notebooksruntimes/pytorch/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd /home/runner/work/notebooks/notebooksruntimes/tensorflow/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd /home/runner/work/notebooks/notebooksruntimes/tensorflow/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
 
       - name: Push changes
         run: |
