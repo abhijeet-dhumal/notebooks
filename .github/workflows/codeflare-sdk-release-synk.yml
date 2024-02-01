@@ -33,10 +33,10 @@ jobs:
 
     - name: Install dependencies
       run: |
-        # install curl
+        #install curl
         apt install curl -y 
         echo -e "Curl installed!\n"
-        # install pyenv
+        #install pyenv
         curl -o $HOME/.pyenv https://pyenv.run | bash
         FILE=$HOME/.pyenv
         if [ -f "$FILE" ]; then
