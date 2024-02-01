@@ -49,8 +49,8 @@ jobs:
       - name: Fetch codeflare_sdk_release_version, and update the Pipfile
         run: |
           pwd 
-          ls -l | echo
-          pwd | echo 
+          ls -l | echo > /dev/null 2>&1
+          pwd | echo > /dev/null 2>&1
           echo "./"
           cat ./README.md > /dev/null 2>&1
           echo "nothing"
