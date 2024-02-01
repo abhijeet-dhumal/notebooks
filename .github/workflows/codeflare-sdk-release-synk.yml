@@ -31,33 +31,15 @@ jobs:
         git checkout -b ${{ env.UPDATER_BRANCH }}
         git push --set-upstream origin ${{ env.UPDATER_BRANCH }}
 
-    - name: Install dependencies
-      run: |
-        #install curl
-        apt install curl -y 
-        echo -e "Curl installed!\n"
-        #install pyenv
-        curl -o $HOME/.pyenv https://pyenv.run | bash
-        FILE=$HOME/.pyenv
-        if [ -f "$FILE" ]; then
-          echo "$FILE exists"
-        fi
-        echo 'export PYENV_ROOT="$HOME/.pyenv"' >> $GITHUB_ENV
-        echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> $GITHUB_ENV
-        echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n eval "$(pyenv init -)"\nfi' >> $GITHUB_ENV
-        if command -v pyenv &> /dev/null;then
-          pyenv install 3.8
-          pyenv install 3.9
-          pyenv global 3.9
-        else
-          echo "pyenv not installed" 
-        python --version
-        #install pipenv
-        if command -v pip &> /dev/null;then 
-          pip install pipenv 
-        else
-          echo "pip not installed"
-        fi
+    - name: Setup Python environment
+      uses: actions/setup-python@v4
+      with:
+        python-version: |
+          3.8
+          3.9
+
+    - name: Install pipenv
+      run: pip install pipenv
 
     - name: make sync 
       run: |
@@ -78,8 +60,8 @@ jobs:
 
     - name: Push changes
       run: |
-        git fetch origin  ${{ env.UPDATER_BRANCH }} && git pull origin  ${{ env.UPDATER_BRANCH }} && git add ./jupyter/pytorch/ubi9-python-3.9/Pipfile && git commit -m "Update pipfile to sync with Codeflare-SDK release via ${{ env.UPDATER_BRANCH }} GitHub action" && git push origin  ${{ env.UPDATER_BRANCH }}
-
+        #git fetch origin  ${{ env.UPDATER_BRANCH }} && git pull origin  ${{ env.UPDATER_BRANCH }} && git add ./jupyter/pytorch/ubi9-python-3.9/Pipfile && git commit -m "Update pipfile to sync with Codeflare-SDK release via ${{ env.UPDATER_BRANCH }} GitHub action" && git push origin  ${{ env.UPDATER_BRANCH }}
+        git fetch origin  ${{ env.UPDATER_BRANCH }} && git pull origin  ${{ env.UPDATER_BRANCH }} && git add . -m "Updated Codeflare-SDK via ${{ env.UPDATER_BRANCH }} GitHub action" && git push origin  ${{ env.UPDATER_BRANCH }}
     - name: pull-request
       uses: repo-sync/pull-request@v2
       with:
