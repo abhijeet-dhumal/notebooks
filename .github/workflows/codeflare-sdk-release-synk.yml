@@ -31,23 +31,13 @@ jobs:
       # Create a new branch
       - name: Create a new branch
         run: |
-         echo ${{ env.UPDATER_BRANCH }}
-         git checkout -b ${{ env.UPDATER_BRANCH }}
-         git push --set-upstream origin ${{ env.UPDATER_BRANCH }}
+          echo ${{ env.UPDATER_BRANCH }}
+          git checkout -b ${{ env.UPDATER_BRANCH }}
+          git push --set-upstream origin ${{ env.UPDATER_BRANCH }}
 
-  update-sync:
-    needs: [initialize]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Configure Git
-        run: |
-         git config --global user.email "github-actions[bot]@users.noreply.github.com"
-         git config --global user.name "GitHub Actions"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "GitHub Actions"
 
-      - name: Fetch codeflare_sdk_release_version, and update the Pipfile
-        run: |
           pwd 
           pwd | echo > /dev/null 2>&1 || true
           echo "./"
@@ -57,6 +47,7 @@ jobs:
           echo "/"
           cat /README.md > /dev/null 2>&1 || true
           echo -e "\n" > /dev/null 2>&1 || true
+          
           cd ./jupyter/datascience/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
           cd ./jupyter/datascience/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
           cd ./jupyter/pytorch/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
