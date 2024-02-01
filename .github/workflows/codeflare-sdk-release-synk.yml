@@ -52,11 +52,11 @@ jobs:
           ls -l | echo
           pwd | echo 
           echo "./"
-          cat ./README.md
+          cat ./README.md > /dev/null 2>&1
           echo "nothing"
-          cat README.md
+          cat README.md > /dev/null 2>&1
           echo "/"
-          cat /README.md
+          cat /README.md > /dev/null 2>&1
           echo -e "\n"
           cd ./jupyter/datascience/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
           cd ./jupyter/datascience/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
