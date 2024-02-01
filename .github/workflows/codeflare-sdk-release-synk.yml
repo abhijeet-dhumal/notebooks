@@ -35,7 +35,7 @@ jobs:
       run: |
         git config --global user.email "github-actions[bot]@users.noreply.github.com"
         git config --global user.name "GitHub Actions"
-        cd jupyter/datascience/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+        cd jupyter/datascience/ubi8-python-3.8 && pipenv install codeflare-sdk~=${github.event.inputs.codeflare_sdk_release_version}
         cd jupyter/datascience/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
         cd jupyter/pytorch/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
         cd jupyter/tensorflow/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
@@ -57,7 +57,7 @@ jobs:
       with:
         source_branch: ${{ env.UPDATER_BRANCH }}
         destination_branch: ${{ env.BRANCH_NAME}}
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.TOKEN }}
         pr_label: "automated pr"
         pr_title: "[Digest Updater Action] Update notebook's pipfile to sync with Codeflare-SDK release"
         pr_body: |
