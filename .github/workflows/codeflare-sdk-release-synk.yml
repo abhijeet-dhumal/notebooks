@@ -1,0 +1,93 @@
+---
+# The aim of this GitHub workflow is to update the pipfile to sync with Codeflare-SDK release.
+name: Sync with codeflare-release
+on:  # yamllint disable-line rule:truthy
+  workflow_dispatch:
+    inputs:
+      codeflare_sdk_release_version:
+        required: true
+        description: "Provide the version of the codeflare release you want to update to : "
+      branch:
+        required: true
+        description: "Provide the name of the branch you want to update ex main, vYYYYx etc: "
+
+env:
+  BRANCH_NAME: ${{ github.event.inputs.branch || 'main' }}
+  CODEFLARE_RELEASE_VERSION: ${{ github.event.inputs.codeflare_sdk_release_version }}
+  UPDATER_BRANCH: codeflare-sync-updater-${{ github.run_id }}
+
+jobs:
+  initialize:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      # Checkout the branch
+      - name: Checkout branch
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ env.BRANCH_NAME }}
+
+      # Create a new branch
+      - name: Create a new branch
+        run: |
+         echo ${{ env.UPDATER_BRANCH }}
+         git checkout -b ${{ env.UPDATER_BRANCH }}
+         git push --set-upstream origin ${{ env.UPDATER_BRANCH }}
+
+  update-sync:
+    needs: [initialize]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Configure Git
+        run: |
+         git config --global user.email "github-actions[bot]@users.noreply.github.com"
+         git config --global user.name "GitHub Actions"
+
+      - name: Fetch codeflare_sdk_release_version, and update the Pipfile
+        run: |
+          cd jupyter/datascience/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd jupyter/datascience/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd jupyter/pytorch/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd jupyter/tensorflow/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd jupyter/trustyai/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd jupyter/trustyai/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd runtimes/datascience/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd runtimes/datascience/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd runtimes/pytorch/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd runtimes/pytorch/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd runtimes/tensorflow/ubi8-python-3.8 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+          cd runtimes/tensorflow/ubi9-python-3.9 && pipenv install codeflare-sdk~="${github.event.inputs.codeflare_sdk_release_version}"
+
+      - name: Push changes
+        run: |
+          git fetch origin  ${{ env.UPDATER_BRANCH }} && git pull origin  ${{ env.UPDATER_BRANCH }} && git add ./jupyter/pytorch/ubi9-python-3.9/Pipfile && git commit -m "Update pipfile to sync with Codeflare-SDK release via ${{ env.UPDATER_BRANCH }} GitHub action" && git push origin  ${{ env.UPDATER_BRANCH }}
+  
+  # Creates the Pull Request
+  open-pull-request:
+    needs: [update-sync]
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: pull-request
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: ${{ env.UPDATER_BRANCH }}
+          destination_branch: ${{ env.BRANCH_NAME}}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_label: "automated pr"
+          pr_title: "[Digest Updater Action] Update notebook's pipfile to sync with Codeflare-SDK release"
+          pr_body: |
+            :rocket: This is an automated Pull Request.
+
+            This PR updates the `jupyter/pytorch/ubi9-python-3.9/Pipfile` file with the updated Codeflare-SDK release.
+
+            Created by `/.github/workflows/codeflare-release-sync.yaml`
+
+            :exclamation: **IMPORTANT NOTE**: Remember to delete the ` ${{ env.UPDATER_BRANCH }}` branch after merging the changes
