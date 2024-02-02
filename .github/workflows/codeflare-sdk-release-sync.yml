@@ -74,7 +74,8 @@ jobs:
           done
           # iterate over the directories and update Pipfile
           for dir in "${directories[@]}"; do
-            cd "$dir" && pipenv install codeflare-sdk~="${CODEFLARE_RELEASE_VERSION}" && cd -
+            #cd "$dir" && pipenv install codeflare-sdk~="${CODEFLARE_RELEASE_VERSION}" && cd -
+            sed -i 's/codeflare-sdk = "~=.*"/codeflare-sdk = "~='"${CODEFLARE_RELEASE_VERSION}"'"/' $dir/Pipfile
           done
 
       - name: Push changes
