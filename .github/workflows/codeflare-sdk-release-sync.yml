@@ -59,7 +59,7 @@ jobs:
             current_dir=$(dirname "$path")
             #Check if current_dir is not in exclude_directories list
             if [[ ! "${exclude_directories[@]}" =~ "$current_dir" ]]; then
-              #Check if Pipfile exists in current_dir 
+              #Check if Pipfile exists in current_dir
               if [ -f "$current_dir/Pipfile" ];then
                 directories+=("$current_dir")
               fi
@@ -74,7 +74,8 @@ jobs:
           done
           # iterate over the directories and update Pipfile
           for dir in "${directories[@]}"; do
-            cd "$dir" && pipenv install codeflare-sdk~="${CODEFLARE_RELEASE_VERSION}" && cd -
+            #cd "$dir" && pipenv install codeflare-sdk~="${CODEFLARE_RELEASE_VERSION}" && cd -
+            sed -i 's/codeflare-sdk = "~=.*"/codeflare-sdk = "~='"${CODEFLARE_RELEASE_VERSION}"'"/' $dir/Pipfile
           done
 
       - name: Push changes
