@@ -27,10 +27,12 @@ RUN yum install -y yum-utils && \
     yum -y clean all --enablerepo='*'
 
 # set R library to default (used in install.r from littler)
+RUN chmod -R a+w /usr/lib64/R/library
 ENV LIBLOC /usr/lib64/R/library
 
 # set User R Library path
-ENV R_LIBS_USER /opt/app-root/src/Rpackages/4.2
+RUN mkdir -p /opt/app-root/src/Rpackages/4.3 && chmod -R a+w /opt/app-root/src/Rpackages/4.3
+ENV R_LIBS_USER /opt/app-root/src/Rpackages/4.3
 
 WORKDIR /tmp/
 
@@ -48,7 +50,6 @@ COPY rsession.conf /etc/rstudio/rsession.conf
 # package installation 
 RUN dnf install -y libsodium-devel.x86_64 libgit2-devel.x86_64 libcurl-devel harfbuzz-devel.x86_64 fribidi-devel.x86_64 cmake "flexiblas-*"
 RUN R -e "install.packages('Rcpp')"
-RUN R -e 'install.packages(c("tidyverse", "tidymodels", "plumber", "vetiver", "devtools"))'
 
 # Install NGINX to proxy RStudio and pass probes check 
 ENV NGINX_VERSION=1.22 \
