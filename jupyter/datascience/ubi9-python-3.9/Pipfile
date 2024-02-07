@@ -22,7 +22,6 @@ pymongo = "~=4.5.0"
 psycopg = "~=3.1.10"
 pyodbc = "~=4.0.39"
 mysql-connector-python = "~=8.0.33"
-
 # JupyterLab packages
 elyra-pipeline-editor-extension = "~=3.15.0"
 elyra-python-editor-extension = "~=3.15.0"
@@ -39,7 +38,6 @@ jupyterlab-widgets = "~=3.0.8"
 jupyter-resource-usage = "~=1.0.1"
 nbdime = "~=3.2.1"
 nbgitpuller = "~=1.2.0"
-
 # Base packages
 wheel = "~=0.41.2"
 setuptools = "~=68.1.2"
