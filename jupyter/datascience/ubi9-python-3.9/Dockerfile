@@ -28,7 +28,7 @@ COPY utils ./utils/
 USER root
 
 # Install usefull OS packages
-RUN dnf install -y jq unixODBC postgresql git-lfs libsndfile
+RUN dnf install -y jq unixODBC postgresql git-lfs libsndfile && dnf clean all && rm -rf /var/cache/yum
 
 # Disable announcement plugin of jupyterlab
 RUN jupyter labextension disable "@jupyterlab/apputils-extension:announcements"
@@ -36,12 +36,12 @@ RUN jupyter labextension disable "@jupyterlab/apputils-extension:announcements"
 # Install MongoDB Client, We need a special repo for MongoDB as they do their own distribution
 COPY mongodb-org-6.0.repo-x86_64 /etc/yum.repos.d/mongodb-org-6.0.repo
 
-RUN dnf install -y mongocli
+RUN dnf install -y mongocli && dnf clean all && rm -rf /var/cache/yum
 
 # Install MSSQL Client, We need a special repo for MSSQL as they do their own distribution
 COPY mssql-2022.repo-x86_64 /etc/yum.repos.d/mssql-2022.repo
 
-RUN ACCEPT_EULA=Y dnf install -y mssql-tools18 unixODBC-devel
+RUN ACCEPT_EULA=Y dnf install -y mssql-tools18 unixODBC-devel && dnf clean all && rm -rf /var/cache/yum
 
 ENV PATH="$PATH:/opt/mssql-tools18/bin"
 
@@ -55,13 +55,6 @@ RUN mkdir /opt/app-root/runtimes && \
     sed -i "s/Kubeflow Pipelines/Data Science/g" /opt/app-root/lib/python3.9/site-packages/elyra/pipeline/runtime_type.py && \
     sed -i "s/Kubeflow Pipelines/Data Science Pipelines/g" /opt/app-root/lib/python3.9/site-packages/elyra/metadata/schemas/kfp.json && \
     sed -i "s/kubeflow-service/data-science-pipeline-service/g" /opt/app-root/lib/python3.9/site-packages/elyra/metadata/schemas/kfp.json && \
-    sed -i "s/\"default\": \"Argo\",/\"default\": \"Tekton\",/g" /opt/app-root/lib/python3.9/site-packages/elyra/metadata/schemas/kfp.json && \
-    # Workaround for passing ssl_sa_cert and to ensure that Elyra redirects to a correct pipeline run URL
-    patch /opt/app-root/lib/python3.9/site-packages/elyra/pipeline/kfp/kfp_authentication.py -i utils/kfp_authentication.patch && \
-    patch /opt/app-root/lib/python3.9/site-packages/elyra/pipeline/kfp/processor_kfp.py -i utils/processor_kfp.patch && \
-    # Workaround for elyra pipeline validation command
-    patch /opt/app-root/lib/python3.9/site-packages/elyra/cli/pipeline_app.py -i utils/pipeline_app.patch && \
-    patch /opt/app-root/lib/python3.9/site-packages/elyra/pipeline/pipeline_definition.py -i utils/pipeline_definition.patch && \
     # switch to Data Science Pipeline in component catalog \
     DIR_COMPONENT="/opt/app-root/lib/python3.9/site-packages/elyra/metadata/schemas/local-directory-catalog.json" && \
     FILE_COMPONENT="/opt/app-root/lib/python3.9/site-packages/elyra/metadata/schemas/local-file-catalog.json" && \
