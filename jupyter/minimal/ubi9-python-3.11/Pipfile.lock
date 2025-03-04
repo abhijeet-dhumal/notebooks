@@ -18,11 +18,11 @@
     "default": {
         "aiohappyeyeballs": {
             "hashes": [
-                "sha256:147ec992cf873d74f5062644332c539fcd42956dc69453fe5204195e560517e1",
-                "sha256:9b05052f9042985d32ecbe4b59a77ae19c006a78f1344d7fdad69d28ded3d0b0"
+                "sha256:19728772cb12263077982d2f55453babd8bec6a052a926cd5c0c42796da8bf62",
+                "sha256:6cac4f5dd6e34a9644e69cf9021ef679e4394f54e58a183056d12009e42ea9e3"
             ],
             "markers": "python_version >= '3.9'",
-            "version": "==2.4.6"
+            "version": "==2.4.8"
         },
         "aiohttp": {
             "hashes": [
@@ -643,11 +643,19 @@
         },
         "ipython": {
             "hashes": [
-                "sha256:be2c91895b0b9ea7ba49d33b23e2040c352b33eb6a519cca7ce6e0c743444251",
-                "sha256:cae85b0c61eff1fc48b0a8002de5958b6528fa9c8defb1894da63f42613708aa"
+                "sha256:377ea91c8226b48dc9021ac9846a64761abc7ddf74c5efe38e6eb06f6e052f3a",
+                "sha256:3e878273824b52e0a2280ed84f8193aba8c4ba9a6f45a438348a3d5ef1a34bd0"
             ],
-            "markers": "python_version >= '3.10'",
-            "version": "==8.32.0"
+            "markers": "python_version >= '3.11'",
+            "version": "==9.0.1"
+        },
+        "ipython-pygments-lexers": {
+            "hashes": [
+                "sha256:09c0138009e56b6854f9535736f4171d855c8c08a563a0dcd8022f78355c7e81",
+                "sha256:a9462224a505ade19a605f71f8fa63c2048833ce50abc86768a0d81d876dc81c"
+            ],
+            "markers": "python_version >= '3.8'",
+            "version": "==1.1.1"
         },
         "isoduration": {
             "hashes": [
