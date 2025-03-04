@@ -4,9 +4,9 @@
 #
 # Default dependencies
 #
-aiohappyeyeballs==2.4.6; python_version >= '3.9' \
-    --hash=sha256:147ec992cf873d74f5062644332c539fcd42956dc69453fe5204195e560517e1 \
-    --hash=sha256:9b05052f9042985d32ecbe4b59a77ae19c006a78f1344d7fdad69d28ded3d0b0
+aiohappyeyeballs==2.4.8; python_version >= '3.9' \
+    --hash=sha256:19728772cb12263077982d2f55453babd8bec6a052a926cd5c0c42796da8bf62 \
+    --hash=sha256:6cac4f5dd6e34a9644e69cf9021ef679e4394f54e58a183056d12009e42ea9e3
 aiohttp==3.11.13; python_version >= '3.9' \
     --hash=sha256:00c8ac69e259c60976aa2edae3f13d9991cf079aaa4d3cd5a49168ae3748dee3 \
     --hash=sha256:01816f07c9cc9d80f858615b1365f8319d6a5fd079cd668cc58e15aafbc76a54 \
@@ -467,9 +467,12 @@ idna==3.10; python_version >= '3.6' \
 ipykernel==6.29.5; python_version >= '3.8' \
     --hash=sha256:afdb66ba5aa354b09b91379bac28ae4afebbb30e8b39510c9690afb7a10421b5 \
     --hash=sha256:f093a22c4a40f8828f8e330a9c297cb93dcab13bd9678ded6de8e5cf81c56215
-ipython==8.32.0; python_version >= '3.10' \
-    --hash=sha256:be2c91895b0b9ea7ba49d33b23e2040c352b33eb6a519cca7ce6e0c743444251 \
-    --hash=sha256:cae85b0c61eff1fc48b0a8002de5958b6528fa9c8defb1894da63f42613708aa
+ipython==9.0.1; python_version >= '3.11' \
+    --hash=sha256:377ea91c8226b48dc9021ac9846a64761abc7ddf74c5efe38e6eb06f6e052f3a \
+    --hash=sha256:3e878273824b52e0a2280ed84f8193aba8c4ba9a6f45a438348a3d5ef1a34bd0
+ipython-pygments-lexers==1.1.1; python_version >= '3.8' \
+    --hash=sha256:09c0138009e56b6854f9535736f4171d855c8c08a563a0dcd8022f78355c7e81 \
+    --hash=sha256:a9462224a505ade19a605f71f8fa63c2048833ce50abc86768a0d81d876dc81c
 isoduration==20.11.0; python_version >= '3.7' \
     --hash=sha256:ac2f9015137935279eac671f94f89eb00584f940f5dc49462a0c4ee692ba1bd9 \
     --hash=sha256:b2904c2a4228c3d44f409c8ae8e2370eb21a26f7ac2ec5446df141dde3452042
